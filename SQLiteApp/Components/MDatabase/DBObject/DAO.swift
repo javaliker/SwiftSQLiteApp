@@ -3,7 +3,7 @@
 //  MDatabase
 //
 //  Created by iDevFans on 16/8/31.
-//  Copyright © 2016年 macdev. All rights reserved.
+//  Copyright © 2016年 http://www.macdev.io All rights reserved.
 //
 
 import Cocoa
@@ -257,7 +257,7 @@ class DAO: NSObject {
     }
     
     func sqlUpdate(sql: String) -> Bool {
-        return sqlUpdate(sql: sql, withArgumentsIn: nil)
+        return sqlUpdate(sql: sql, withArgumentsIn: [AnyObject]())
     }
     
     func sqlUpdate(sql: String, withArgumentsIn args: [AnyObject]?) -> Bool {

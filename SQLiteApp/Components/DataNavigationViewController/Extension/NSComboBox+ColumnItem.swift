@@ -3,7 +3,7 @@
 //  TableViewControllerDemo
 //
 //  Created by iDevFans on 16/8/20.
-//  Copyright © 2016年 macdev. All rights reserved.
+//  Copyright © 2016年 http://www.macdev.io All rights reserved.
 //
 
 import Foundation

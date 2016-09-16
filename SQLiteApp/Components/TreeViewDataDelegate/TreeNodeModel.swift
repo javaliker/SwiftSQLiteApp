@@ -3,7 +3,7 @@
 //  NSOutlineView
 //
 //  Created by iDevFans on 16/7/11.
-//  Copyright © 2016年 http://macdev.io. All rights reserved.
+//  Copyright © 2016年 http://http://www.macdev.ioio. All rights reserved.
 //
 
 import Cocoa

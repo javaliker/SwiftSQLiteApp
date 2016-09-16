@@ -3,14 +3,15 @@
 //  SQLiteApp
 //
 //  Created by iDevFans on 16/9/4.
-//  Copyright © 2016年 macdev. All rights reserved.
+//  Copyright © 2016年 http://www.macdev.io All rights reserved.
 //
 
 import Cocoa
 
-let kHomeURL = "http://macdev.io"
+let kHomeURL = "http://www.macdev.io"
 
 class AppMainWindowController: NSWindowController {
+    
     lazy var splitViewController: AppMainSplitViewController = {
         let vc = AppMainSplitViewController()
         return vc
@@ -28,11 +29,10 @@ class AppMainWindowController: NSWindowController {
     func configWindowStyle() {
         //Toolbar 跟titleBar 融合在一起显示
         self.window?.titleVisibility = .hidden;
-        
         //透明化
         self.window?.titlebarAppearsTransparent = true
         //设置背景颜色
-        //self.window?.backgroundColor = NSColor.white
+        self.window?.backgroundColor = NSColor.white
     }
     
     override var windowNibName: String? {
@@ -111,6 +111,5 @@ class AppMainWindowController: NSWindowController {
 extension Notification.Name {
     //定义消息通知名称
     static let onOpenDBFile  = Notification.Name("on-open-file")
-    
     static let onCloseDBFile = Notification.Name("on-close-file")
 }

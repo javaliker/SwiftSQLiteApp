@@ -3,10 +3,11 @@
 //  SQLiteApp
 //
 //  Created by iDevFans on 16/9/4.
-//  Copyright © 2016年 macdev. All rights reserved.
+//  Copyright © 2016年 http://www.macdev.io All rights reserved.
 //
 
 import Cocoa
+
 
 let kSQLiteDBSavePath = "SQLiteDBSavePath"
 
@@ -34,6 +35,7 @@ class TableListViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
         
         //先判断是否存在上次打开过的数据库路径
         if let dbPath = UserDefaults.standard.object(forKey: kSQLiteDBSavePath) as? String {
@@ -59,9 +61,6 @@ class TableListViewController: NSViewController {
         
         //开始获取数据中的表信息
         self.fetchData()
-        // Do view setup here.
-
-        
     }
     
     func treeViewStyleConfig() {
@@ -73,7 +72,6 @@ class TableListViewController: NSViewController {
     func registerFilesDrag() {
         self.treeView.register(forDraggedTypes: [NSFilenamesPboardType])
     }
-    
     
     func treeViewDelegateConfig() {
         self.treeView.delegate = self.treeViewDelegate
@@ -101,7 +99,6 @@ class TableListViewController: NSViewController {
         NotificationCenter.default.addObserver(self, selector:#selector(self.onCloseSQLiteFile(_:)),  name:NSNotification.Name.onCloseDBFile, object: nil)
     }
     
-    
     func onOpenSQLiteFile(_ notification: Notification){
         let path = notification.object as! String
         self.openDatabaseWithPath(path: path)
@@ -110,7 +107,6 @@ class TableListViewController: NSViewController {
     func onCloseSQLiteFile(_ notification: Notification){
         self.closeDatabase()
     }
-    
     
     func treeViewMenuConfig() {
         self.treeView.tableNodeMenu    = self.tableNodeMenu
@@ -156,7 +152,6 @@ class TableListViewController: NSViewController {
         TableListStateManager.shared.multiDelegate.selectedTableChanged(tableName: tableName)
     }
 
-    
     func openDatabaseWithPath(path: String) {
         if !DataStoreBO.shared.openDBWithPath(path: path) {
             print("Open Db \(path) Failed!")
@@ -174,7 +169,6 @@ class TableListViewController: NSViewController {
         self.treeViewDelegate.clearAll()
         self.treeView.reloadData()
         TableListStateManager.shared.multiDelegate.closeDatabase()
-
     }
 
     //MARK : Menu Action
@@ -188,13 +182,41 @@ class TableListViewController: NSViewController {
     }
     
     @IBAction func dropTableMenuItemClicked(_ sender: AnyObject) {
+        let selectedRow = self.treeView.selectedRow
+        if selectedRow < 0 {
+            return
+        }
+        let node = self.treeView.item(atRow: selectedRow) as! TreeNodeModel
+     
+        if (node.type == kDatabaseNode) {
+            return
+        }
+        let tableName = node.name
         
+        let alert = NSAlert()
+        //增加Ok一个按钮
+        alert.addButton(withTitle: "Ok")
+        //增加取消一个按钮
+        alert.addButton(withTitle: "Cancel")
+        //提示的标题
+        alert.messageText = "Confirm"
+        //提示的详细内容
+        alert.informativeText = "Drop Table \(tableName)?"
+        //设置告警风格
+        alert.alertStyle = NSCriticalAlertStyle
+        //开始显示告警
+        alert.beginSheetModal(for: self.view.window!, completionHandler: {(returnCode: NSModalResponse) -> Void in
+            print("returnCode \(returnCode)")
+            if returnCode == NSAlertFirstButtonReturn {
+                self.dropTable(tableName)
+            }
+            //用户点击告警上面的按钮后的回调
+        })
     }
     
     @IBAction func emptyTableMenuItemClicked(_ sender: AnyObject) {
         
     }
-    
    
     @IBAction func dataBaseOpenInFinderMenuItemClicked(_ sender: AnyObject) {
         
@@ -204,11 +226,22 @@ class TableListViewController: NSViewController {
         
     }
     
+    func dropTable(_ tableName: String ) {
+        
+        let dropSQL = "Drop Table \(tableName)"
+        let dao = DataStoreBO.shared.defaultDao
+        if dao.sqlUpdate(sql: dropSQL) {
+            DataStoreBO.shared.refreshTables()
+            self.fetchData()
+        }
+        else {
+            print("Drop Table Failed!")
+        }
+    }
     
 }
 
 extension TableListViewController: TableListSelectionStateDelegate {
-    
     
     func registerMultiDelegate() {
         TableListStateManager.shared.addMultiDelegate(delegate: self, delegateQueue: nil)
@@ -222,3 +255,5 @@ extension TableListViewController: TableListSelectionStateDelegate {
         print("selectedTableChanged \(tableName)")
     }
 }
+
+

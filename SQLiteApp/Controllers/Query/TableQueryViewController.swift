@@ -3,7 +3,7 @@
 //  SQLiteApp
 //
 //  Created by iDevFans on 16/9/4.
-//  Copyright © 2016年 macdev. All rights reserved.
+//  Copyright © 2016年 http://www.macdev.io All rights reserved.
 //
 
 import Cocoa

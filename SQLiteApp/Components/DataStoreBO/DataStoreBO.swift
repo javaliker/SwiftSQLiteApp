@@ -3,12 +3,12 @@
 //  SQLiteApp
 //
 //  Created by iDevFans on 16/9/6.
-//  Copyright © 2016年 macdev. All rights reserved.
+//  Copyright © 2016年 http://www.macdev.io All rights reserved.
 //
 
 import Cocoa
 
-let kDefaultDatabaseName = "MacDev.sqlite"
+let kDefaultDatabaseName = "http://www.macdev.iosqlite"
 let kDatabaseNode = "database"
 let kTableNode    = "table"
 

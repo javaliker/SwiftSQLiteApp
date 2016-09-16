@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		712EF7D91D8034BC006B6DB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712EF7D81D8034BC006B6DB9 /* AppDelegate.swift */; };
-		712EF7DB1D8034BC006B6DB9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712EF7DA1D8034BC006B6DB9 /* ViewController.swift */; };
 		712EF7DD1D8034BC006B6DB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 712EF7DC1D8034BC006B6DB9 /* Assets.xcassets */; };
 		712EF7E01D8034BC006B6DB9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 712EF7DE1D8034BC006B6DB9 /* Main.storyboard */; };
 		712EF7E81D80350A006B6DB9 /* MacDev.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 712EF7E71D80350A006B6DB9 /* MacDev.sqlite */; };
@@ -51,9 +50,7 @@
 		712EF8951D80353E006B6DB9 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 712EF84D1D80353E006B6DB9 /* FMDatabaseQueue.m */; };
 		712EF8961D80353E006B6DB9 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 712EF8501D80353E006B6DB9 /* FMResultSet.m */; };
 		712EF8971D80353E006B6DB9 /* GCDMulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 712EF8541D80353E006B6DB9 /* GCDMulticastDelegate.m */; };
-		712EF8981D80353E006B6DB9 /* MGSFragaria.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 712EF8551D80353E006B6DB9 /* MGSFragaria.framework */; };
 		712EF89B1D80355C006B6DB9 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 712EF89A1D80355C006B6DB9 /* libsqlite3.0.tbd */; };
-		712EF89D1D80356F006B6DB9 /* MGSFragaria.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 712EF8551D80353E006B6DB9 /* MGSFragaria.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7159C76F1D803ADF0082F8BA /* TableDataNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7159C75E1D803ADF0082F8BA /* TableDataNavigationViewController.swift */; };
 		7159C7701D803ADF0082F8BA /* TableDataNavigationViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7159C75F1D803ADF0082F8BA /* TableDataNavigationViewDelegate.swift */; };
 		7159C7711D803ADF0082F8BA /* XibViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7159C7601D803ADF0082F8BA /* XibViewController.swift */; };
@@ -67,6 +64,8 @@
 		7159C7791D803ADF0082F8BA /* NSTextField+ColumnItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7159C76A1D803ADF0082F8BA /* NSTextField+ColumnItem.swift */; };
 		7159C77A1D803ADF0082F8BA /* TableColumnItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7159C76C1D803ADF0082F8BA /* TableColumnItem.swift */; };
 		7159C77B1D803ADF0082F8BA /* TableDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7159C76E1D803ADF0082F8BA /* TableDataDelegate.swift */; };
+		71CAC4111D8A9E7300500E5F /* MGSFragaria.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71CAC4101D8A9E7300500E5F /* MGSFragaria.framework */; };
+		71CAC4121D8A9E8300500E5F /* MGSFragaria.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 71CAC4101D8A9E7300500E5F /* MGSFragaria.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		71D62BFC1D8118EF00A99069 /* JSONKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D62BFB1D8118EF00A99069 /* JSONKit.swift */; };
 		71D62BFE1D8119A900A99069 /* NSPasteboard+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D62BFD1D8119A900A99069 /* NSPasteboard+Ext.swift */; };
 		71D62C001D8160D100A99069 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D62BFF1D8160D100A99069 /* PreferencesWindowController.swift */; };
@@ -80,7 +79,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				712EF89D1D80356F006B6DB9 /* MGSFragaria.framework in CopyFiles */,
+				71CAC4121D8A9E8300500E5F /* MGSFragaria.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
@@ -89,7 +88,6 @@
 /* Begin PBXFileReference section */
 		712EF7D51D8034BC006B6DB9 /* SwiftSQLiteApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftSQLiteApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		712EF7D81D8034BC006B6DB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		712EF7DA1D8034BC006B6DB9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		712EF7DC1D8034BC006B6DB9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		712EF7DF1D8034BC006B6DB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		712EF7E11D8034BC006B6DB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -142,7 +140,6 @@
 		712EF8511D80353E006B6DB9 /* MDatabase-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MDatabase-Bridging-Header.h"; sourceTree = "<group>"; };
 		712EF8531D80353E006B6DB9 /* GCDMulticastDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDMulticastDelegate.h; sourceTree = "<group>"; };
 		712EF8541D80353E006B6DB9 /* GCDMulticastDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDMulticastDelegate.m; sourceTree = "<group>"; };
-		712EF8551D80353E006B6DB9 /* MGSFragaria.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MGSFragaria.framework; sourceTree = "<group>"; };
 		712EF89A1D80355C006B6DB9 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		7159C75E1D803ADF0082F8BA /* TableDataNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableDataNavigationViewController.swift; sourceTree = "<group>"; };
 		7159C75F1D803ADF0082F8BA /* TableDataNavigationViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableDataNavigationViewDelegate.swift; sourceTree = "<group>"; };
@@ -157,6 +154,8 @@
 		7159C76A1D803ADF0082F8BA /* NSTextField+ColumnItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTextField+ColumnItem.swift"; sourceTree = "<group>"; };
 		7159C76C1D803ADF0082F8BA /* TableColumnItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableColumnItem.swift; sourceTree = "<group>"; };
 		7159C76E1D803ADF0082F8BA /* TableDataDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableDataDelegate.swift; sourceTree = "<group>"; };
+		71CAC4101D8A9E7300500E5F /* MGSFragaria.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MGSFragaria.framework; sourceTree = "<group>"; };
+		71CAC4131D8B9B5000500E5F /* SwiftSQLiteApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftSQLiteApp.entitlements; sourceTree = "<group>"; };
 		71D62BFB1D8118EF00A99069 /* JSONKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONKit.swift; sourceTree = "<group>"; };
 		71D62BFD1D8119A900A99069 /* NSPasteboard+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSPasteboard+Ext.swift"; sourceTree = "<group>"; };
 		71D62BFF1D8160D100A99069 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
@@ -169,7 +168,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				712EF89B1D80355C006B6DB9 /* libsqlite3.0.tbd in Frameworks */,
-				712EF8981D80353E006B6DB9 /* MGSFragaria.framework in Frameworks */,
+				71CAC4111D8A9E7300500E5F /* MGSFragaria.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,6 +178,7 @@
 		712EF7CC1D8034BC006B6DB9 = {
 			isa = PBXGroup;
 			children = (
+				71CAC4131D8B9B5000500E5F /* SwiftSQLiteApp.entitlements */,
 				712EF7D71D8034BC006B6DB9 /* SQLiteApp */,
 				712EF7D61D8034BC006B6DB9 /* Products */,
 				712EF8991D80355C006B6DB9 /* Frameworks */,
@@ -202,7 +202,7 @@
 				712EF8431D80353E006B6DB9 /* Models */,
 				712EF8441D80353E006B6DB9 /* Vendor */,
 				712EF7D81D8034BC006B6DB9 /* AppDelegate.swift */,
-				712EF7DA1D8034BC006B6DB9 /* ViewController.swift */,
+				71CAC4101D8A9E7300500E5F /* MGSFragaria.framework */,
 				712EF7DC1D8034BC006B6DB9 /* Assets.xcassets */,
 				712EF7E71D80350A006B6DB9 /* MacDev.sqlite */,
 				712EF7E91D803519006B6DB9 /* SQLiteApp-Bridging-Header.h */,
@@ -395,7 +395,6 @@
 			children = (
 				712EF8451D80353E006B6DB9 /* fmdb */,
 				712EF8521D80353E006B6DB9 /* GCDMulticastDelegate */,
-				712EF8551D80353E006B6DB9 /* MGSFragaria.framework */,
 			);
 			path = Vendor;
 			sourceTree = "<group>";
@@ -531,6 +530,11 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 4NGF9QU6K9;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -587,7 +591,6 @@
 				7159C7791D803ADF0082F8BA /* NSTextField+ColumnItem.swift in Sources */,
 				712EF8781D80353E006B6DB9 /* MDatabase.swift in Sources */,
 				712EF88F1D80353E006B6DB9 /* TableListViewController.swift in Sources */,
-				712EF7DB1D8034BC006B6DB9 /* ViewController.swift in Sources */,
 				712EF87F1D80353E006B6DB9 /* String+Regex.swift in Sources */,
 				712EF87E1D80353E006B6DB9 /* TypeKit.swift in Sources */,
 				712EF8861D80353E006B6DB9 /* AppMainSplitViewController.swift in Sources */,
@@ -739,14 +742,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SwiftSQLiteApp.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 4NGF9QU6K9;
+				DEVELOPMENT_TEAM = "";
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SQLiteApp/Vendor",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/SQLiteApp",
 				);
 				INFOPLIST_FILE = SQLiteApp/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CODE_SIGN_FLAGS = "--deep";
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = app.io.SQLiteApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SQLiteApp/SQLiteApp-Bridging-Header.h";
@@ -758,14 +769,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SwiftSQLiteApp.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 4NGF9QU6K9;
+				DEVELOPMENT_TEAM = "";
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SQLiteApp/Vendor",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/SQLiteApp",
 				);
 				INFOPLIST_FILE = SQLiteApp/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CODE_SIGN_FLAGS = "--deep";
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = app.io.SQLiteApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SQLiteApp/SQLiteApp-Bridging-Header.h";

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11191" systemVersion="15G31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11191"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="TableListViewController" customModule="SQLiteApp" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="TableListViewController" customModule="SwiftSQLiteApp" customModuleProvider="target">
             <connections>
                 <outlet property="dataBaseNodeMenu" destination="8sd-Vm-R3Z" id="u03-wN-YHG"/>
                 <outlet property="tableNodeMenu" destination="Q1a-lk-SRC" id="1fc-o5-w4R"/>
@@ -25,7 +25,7 @@
                         <rect key="frame" x="1" y="1" width="317" height="270"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="28" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" outlineTableColumn="Sqn-1U-BLa" id="rC8-e6-8EX" customClass="TableListView" customModule="SQLiteApp" customModuleProvider="target">
+                            <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="28" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" outlineTableColumn="Sqn-1U-BLa" id="rC8-e6-8EX" customClass="TableListView" customModule="SwiftSQLiteApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="317" height="270"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
@@ -45,31 +45,8 @@
                                         </textFieldCell>
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         <prototypeCellViews>
-                                            <tableCellView identifier="table" id="yBO-gn-hml" userLabel="DBTable Cell View">
-                                                <rect key="frame" x="1" y="1" width="314" height="28"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                <subviews>
-                                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4hN-wp-qtg" userLabel="DBTable Image View">
-                                                        <rect key="frame" x="3" y="4" width="20" height="20"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="table" id="FcY-kt-4yh"/>
-                                                    </imageView>
-                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ARb-lr-7dV" userLabel="DBTable Name View Cell">
-                                                        <rect key="frame" x="23" y="7" width="245" height="17"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Database Table  Name" id="5Rf-ib-27i">
-                                                            <font key="font" metaFont="system"/>
-                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                        </textFieldCell>
-                                                    </textField>
-                                                </subviews>
-                                                <connections>
-                                                    <outlet property="textField" destination="ARb-lr-7dV" id="6ZM-Jk-qxN"/>
-                                                </connections>
-                                            </tableCellView>
                                             <tableCellView identifier="database" id="Kmz-bi-Elk" userLabel="DB Cell View">
-                                                <rect key="frame" x="1" y="31" width="314" height="28"/>
+                                                <rect key="frame" x="1" y="1" width="314" height="28"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vcb-rz-YT4" userLabel="DB Image View">
@@ -89,6 +66,29 @@
                                                 </subviews>
                                                 <connections>
                                                     <outlet property="textField" destination="LOv-eh-OeF" id="ToN-QI-zYT"/>
+                                                </connections>
+                                            </tableCellView>
+                                            <tableCellView identifier="table" id="yBO-gn-hml" userLabel="DBTable Cell View">
+                                                <rect key="frame" x="1" y="31" width="314" height="28"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4hN-wp-qtg" userLabel="DBTable Image View">
+                                                        <rect key="frame" x="3" y="4" width="20" height="20"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="table" id="FcY-kt-4yh"/>
+                                                    </imageView>
+                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ARb-lr-7dV" userLabel="DBTable Name View Cell">
+                                                        <rect key="frame" x="23" y="7" width="245" height="17"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Database Table  Name" id="5Rf-ib-27i">
+                                                            <font key="font" metaFont="system"/>
+                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                </subviews>
+                                                <connections>
+                                                    <outlet property="textField" destination="ARb-lr-7dV" id="6ZM-Jk-qxN"/>
                                                 </connections>
                                             </tableCellView>
                                         </prototypeCellViews>
@@ -113,7 +113,7 @@
                 <constraint firstItem="2Q1-Ch-V3R" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="dl4-dR-wLh"/>
                 <constraint firstAttribute="bottom" secondItem="2Q1-Ch-V3R" secondAttribute="bottom" id="p0y-w4-PHJ"/>
             </constraints>
-            <point key="canvasLocation" x="58.5" y="169"/>
+            <point key="canvasLocation" x="60" y="408"/>
         </customView>
         <menu title="Table" id="Q1a-lk-SRC">
             <items>

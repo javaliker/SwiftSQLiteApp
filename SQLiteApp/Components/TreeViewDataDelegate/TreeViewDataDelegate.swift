@@ -3,7 +3,7 @@
 //  SQLiteApp
 //
 //  Created by iDevFans on 16/9/5.
-//  Copyright © 2016年 macdev. All rights reserved.
+//  Copyright © 2016年 http://www.macdev.io All rights reserved.
 //
 
 import Cocoa
@@ -81,7 +81,6 @@ class TreeViewDataDelegate: NSObject {
     }
 }
 
-
 extension TreeViewDataDelegate: NSOutlineViewDelegate {
     
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
@@ -94,11 +93,6 @@ extension TreeViewDataDelegate: NSOutlineViewDelegate {
         let model = item as! TreeNodeModel
         
         field.stringValue = model.name
-        
-//        if model.childNodes.count <= 0 {
-//            imageView.image = NSImage(named: NSImageNameListViewTemplate)
-//        }
-        
         return view
     }
     
@@ -119,9 +113,7 @@ extension TreeViewDataDelegate: NSOutlineViewDelegate {
 
                   callback(item as AnyObject, pItem as AnyObject?)
             }
-          
         }
-
     }
 }
 
@@ -157,9 +149,41 @@ extension TreeViewDataDelegate: NSOutlineViewDataSource {
     func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
         
         let rootNode:TreeNodeModel = item as! TreeNodeModel
-        
         return rootNode.childNodes.count > 0
+    }
+    
+    
+    func  outlineView(_ outlineView: NSOutlineView, validateDrop info: NSDraggingInfo, proposedItem item: Any?, proposedChildIndex index: Int) -> NSDragOperation {
+        
+        return .every
+    }
+    
+    
+    func outlineView(_ outlineView: NSOutlineView, acceptDrop info: NSDraggingInfo, item: Any?, childIndex index: Int) -> Bool {
+   
+        let pboard = info.draggingPasteboard()
+        
+        self.handleFileBasedDrops(pboard)
+      
+        return true
+    }
+    
+    
+    func handleFileBasedDrops(_ pboard: NSPasteboard ) {
+        
+        let files = (pboard.propertyList(forType: NSFilenamesPboardType))! as!  Array<String>
+        let numberOfFiles = files.count
+        
+        if numberOfFiles > 0 {
+            let filePath = files[0] as String
+            //代理通知
+            if let dragFileCallBack = self.dragFileCallBack {
+                dragFileCallBack(filePath)
+            }
+        }
         
     }
+    
 }
+
 

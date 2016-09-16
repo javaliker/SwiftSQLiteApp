@@ -3,7 +3,7 @@
 //  SQLiteApp
 //
 //  Created by iDevFans on 16/9/4.
-//  Copyright © 2016年 macdev. All rights reserved.
+//  Copyright © 2016年 http://www.macdev.io All rights reserved.
 //
 
 import Cocoa
@@ -81,35 +81,34 @@ class TableBrowseViewController: TableDataNavigationViewController {
     
     //MARK: Table Context Menu
     
+    lazy var tableCellMenu: NSMenu = {
+        let tableCellMenu = NSMenu()
+        var item = NSMenuItem()
+        item.title = "Copy as JSON"
+        tableCellMenu.addItem(item)
+        item = NSMenuItem()
+        item.title = "Copy as XML"
+        tableCellMenu.addItem(item)
+        return tableCellMenu
+        
+    }()
     
     func contextMenuConfig() {
         //关联菜单到tableView
-        self.tableView?.menu = self.tabelCellMenu
-        let menus = self.tabelCellMenu.items
+        self.tableView?.menu = self.tableCellMenu
+        let menus = self.tableCellMenu.items
         var opIndex = 0
         for item: NSMenuItem in menus {
             item.target = self
             item.tag = opIndex
-            item.action = #selector(self.tabelCellMenuItemClick)
+            item.action = #selector(self.tableCellMenuItemClick)
             opIndex += 1
         }
     }
     
     
-    lazy var tabelCellMenu: NSMenu = {
-        let tabelCellMenu = NSMenu()
-        var item = NSMenuItem()
-        item.title = "Copy as JSON"
-        tabelCellMenu.addItem(item)
-        item = NSMenuItem()
-        item.title = "Copy as XML"
-        tabelCellMenu.addItem(item)
-        return tabelCellMenu
-    
-    }()
-    
-    
-    @IBAction func tabelCellMenuItemClick(sender: AnyObject) {
+
+    @IBAction func tableCellMenuItemClick(sender: AnyObject) {
         let item = sender
         let index = item.tag
         let selectedRow = self.tableView?.selectedRow
@@ -189,3 +188,5 @@ extension TableBrowseViewController: PaginatorDelegate {
         return DataStoreBO.shared.defaultDao.numbersOfRecordWithSQL(sql: sql)
     }
 }
+
+
