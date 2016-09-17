@@ -25,18 +25,18 @@ class TableQueryViewController: TableDataNavigationViewController {
         return delegate
     }()
     
-    lazy var sqlSyntxView: MGSFragaria = {
-        let syntxView = MGSFragaria()
-        syntxView.setShowsLineNumbers(false)
-        syntxView.setObject("Sql", forKey: MGSFOSyntaxDefinitionName)
-        return syntxView
-    }()
+//    lazy var sqlSyntxView: MGSFragaria = {
+//        let syntxView = MGSFragaria()
+//        syntxView.setShowsLineNumbers(false)
+//        syntxView.setObject("Sql", forKey: MGSFOSyntaxDefinitionName)
+//        return syntxView
+//    }()
     
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.sqlSyntxView.embed(in: self.queryTextView)
+        //self.sqlSyntxView.embed(in: self.queryTextView)
         // Do view setup here.
         //计算分页数据
         self.pageManager.delegate = self
@@ -60,8 +60,8 @@ class TableQueryViewController: TableDataNavigationViewController {
     }
     @IBAction func runSQLAction(_ sender: AnyObject) {
    
-        print("self.queryTextView.string \(self.sqlSyntxView.string)")
-        var sql = self.sqlSyntxView.string()!
+        print("self.queryTextView.string \(self.queryTextView.string)")
+        var sql = self.queryTextView.string!
         if sql.characters.count <= 0 {
             return
         }

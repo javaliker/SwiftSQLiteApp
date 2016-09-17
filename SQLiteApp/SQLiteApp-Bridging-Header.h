@@ -12,6 +12,6 @@
 #import "FMDatabaseQueue.h"
 #import "FMDatabase.h"
 #import "GCDMulticastDelegate.h"
-#import <MGSFragaria/MGSFragaria.h>
+
 
 #endif /*SQLiteApp_Bridging_Header_h */

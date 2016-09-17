@@ -64,8 +64,6 @@
 		7159C7791D803ADF0082F8BA /* NSTextField+ColumnItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7159C76A1D803ADF0082F8BA /* NSTextField+ColumnItem.swift */; };
 		7159C77A1D803ADF0082F8BA /* TableColumnItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7159C76C1D803ADF0082F8BA /* TableColumnItem.swift */; };
 		7159C77B1D803ADF0082F8BA /* TableDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7159C76E1D803ADF0082F8BA /* TableDataDelegate.swift */; };
-		71CAC4111D8A9E7300500E5F /* MGSFragaria.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71CAC4101D8A9E7300500E5F /* MGSFragaria.framework */; };
-		71CAC4121D8A9E8300500E5F /* MGSFragaria.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 71CAC4101D8A9E7300500E5F /* MGSFragaria.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		71D62BFC1D8118EF00A99069 /* JSONKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D62BFB1D8118EF00A99069 /* JSONKit.swift */; };
 		71D62BFE1D8119A900A99069 /* NSPasteboard+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D62BFD1D8119A900A99069 /* NSPasteboard+Ext.swift */; };
 		71D62C001D8160D100A99069 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D62BFF1D8160D100A99069 /* PreferencesWindowController.swift */; };
@@ -79,7 +77,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				71CAC4121D8A9E8300500E5F /* MGSFragaria.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
@@ -154,7 +151,6 @@
 		7159C76A1D803ADF0082F8BA /* NSTextField+ColumnItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTextField+ColumnItem.swift"; sourceTree = "<group>"; };
 		7159C76C1D803ADF0082F8BA /* TableColumnItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableColumnItem.swift; sourceTree = "<group>"; };
 		7159C76E1D803ADF0082F8BA /* TableDataDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableDataDelegate.swift; sourceTree = "<group>"; };
-		71CAC4101D8A9E7300500E5F /* MGSFragaria.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MGSFragaria.framework; sourceTree = "<group>"; };
 		71CAC4131D8B9B5000500E5F /* SwiftSQLiteApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftSQLiteApp.entitlements; sourceTree = "<group>"; };
 		71D62BFB1D8118EF00A99069 /* JSONKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONKit.swift; sourceTree = "<group>"; };
 		71D62BFD1D8119A900A99069 /* NSPasteboard+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSPasteboard+Ext.swift"; sourceTree = "<group>"; };
@@ -168,7 +164,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				712EF89B1D80355C006B6DB9 /* libsqlite3.0.tbd in Frameworks */,
-				71CAC4111D8A9E7300500E5F /* MGSFragaria.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,7 +197,6 @@
 				712EF8431D80353E006B6DB9 /* Models */,
 				712EF8441D80353E006B6DB9 /* Vendor */,
 				712EF7D81D8034BC006B6DB9 /* AppDelegate.swift */,
-				71CAC4101D8A9E7300500E5F /* MGSFragaria.framework */,
 				712EF7DC1D8034BC006B6DB9 /* Assets.xcassets */,
 				712EF7E71D80350A006B6DB9 /* MacDev.sqlite */,
 				712EF7E91D803519006B6DB9 /* SQLiteApp-Bridging-Header.h */,
@@ -532,7 +526,7 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -755,7 +749,7 @@
 				);
 				INFOPLIST_FILE = SQLiteApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = app.io.SQLiteApp;
@@ -782,7 +776,7 @@
 				);
 				INFOPLIST_FILE = SQLiteApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = app.io.SQLiteApp;
