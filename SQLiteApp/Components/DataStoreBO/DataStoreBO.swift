@@ -8,7 +8,7 @@
 
 import Cocoa
 
-let kDefaultDatabaseName = "http://www.macdev.iosqlite"
+let kDefaultDatabaseName = "MacDev.sqlite"
 let kDatabaseNode = "database"
 let kTableNode    = "table"
 
