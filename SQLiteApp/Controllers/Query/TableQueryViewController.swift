@@ -25,22 +25,14 @@ class TableQueryViewController: TableDataNavigationViewController {
         return delegate
     }()
     
-//    lazy var sqlSyntxView: MGSFragaria = {
-//        let syntxView = MGSFragaria()
-//        syntxView.setShowsLineNumbers(false)
-//        syntxView.setObject("Sql", forKey: MGSFOSyntaxDefinitionName)
-//        return syntxView
-//    }()
-    
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.sqlSyntxView.embed(in: self.queryTextView)
-        // Do view setup here.
         //计算分页数据
         self.pageManager.delegate = self
         self.pageManager.pageSize = 10;
+        
+        self.view.wantsLayer = true
+        self.view.layer?.backgroundColor = NSColor.white.cgColor
     }
     
     
@@ -52,16 +44,14 @@ class TableQueryViewController: TableDataNavigationViewController {
 
 
     // MARK: Action
-    
-    
-    @IBAction func clearSQLAction(_ sender: AnyObject) {
 
+    @IBAction func clearSQLAction(_ sender: AnyObject) {
         self.queryTextView.string = ""
     }
     @IBAction func runSQLAction(_ sender: AnyObject) {
    
         print("self.queryTextView.string \(self.queryTextView.string)")
-        var sql = self.queryTextView.string!
+        var sql = self.queryTextView.string
         if sql.characters.count <= 0 {
             return
         }
@@ -112,6 +102,7 @@ class TableQueryViewController: TableDataNavigationViewController {
     override func tableXibView() ->NSTableView? {
         return self.queryTableXibView
     }
+    
     
     override func dataNavigationXibView() ->DataNavigationView? {
         return self.queryNavigationXibView

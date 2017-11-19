@@ -96,7 +96,7 @@ class TableDataNavigationViewController: XibViewController {
     }
     
     func tableViewStyleConfig() {
-        self.tableView?.gridStyleMask = [.solidHorizontalGridLineMask,.solidVerticalGridLineMask ]
+        self.tableView?.gridStyleMask = [NSTableView.GridLineStyle.solidHorizontalGridLineMask,NSTableView.GridLineStyle.solidVerticalGridLineMask ]
         self.tableView?.usesAlternatingRowBackgroundColors = true
     }
     
@@ -106,7 +106,7 @@ class TableDataNavigationViewController: XibViewController {
 
     
     func registerRowDrag() {
-        self.tableView?.register(forDraggedTypes: [kTableViewDragDataTypeName])
+        self.tableView?.registerForDraggedTypes([NSPasteboard.PasteboardType(rawValue: kTableViewDragDataTypeName)])
     }
 
     // MARK: Action
@@ -161,7 +161,7 @@ class TableDataNavigationViewController: XibViewController {
         self.tableView?.beginUpdates()
         let indexes = self.tableView?.selectedRowIndexes
         //以指定的动画风格执行删除
-        self.tableView?.removeRows(at: indexes!, withAnimation: .slideUp)
+        self.tableView?.removeRows(at: indexes!, withAnimation: NSTableView.AnimationOptions.slideUp)
         //完成删除
         self.tableView?.endUpdates()
     }
@@ -171,17 +171,17 @@ class TableDataNavigationViewController: XibViewController {
     
     func dataNavigationItemsConfig() -> [DataNavigationItem] {
         let insertItem = DataNavigationButtonItem()
-        insertItem.imageName = NSImageNameAddTemplate
+        insertItem.imageName = NSImage.Name.addTemplate.rawValue
         insertItem.tooltips = "insert a row into current table"
         insertItem.tag = .add
         
         let deleteItem = DataNavigationButtonItem()
-        deleteItem.imageName = NSImageNameRemoveTemplate
+        deleteItem.imageName = NSImage.Name.removeTemplate.rawValue
         deleteItem.tooltips = "delete seleted rows form current table"
         deleteItem.tag = .remove
         
         let refreshItem = DataNavigationButtonItem()
-        refreshItem.imageName = NSImageNameRefreshTemplate
+        refreshItem.imageName = NSImage.Name.refreshTemplate.rawValue
         refreshItem.tooltips = "reload table data"
         refreshItem.tag = .refresh
         
@@ -225,11 +225,11 @@ class TableDataNavigationViewController: XibViewController {
             //升序排序
             
             //使用系统的排序方法
-            let  sortDescriptor =  NSSortDescriptor(key: tableColumn.identifier, ascending: true,
+            let  sortDescriptor =  NSSortDescriptor(key: tableColumn.identifier.rawValue, ascending: true,
                                                    selector: #selector(NSNumber.compare(_:)))
             
             //使用自定义的排序方法
-            let sortRules = NSSortDescriptor(key: tableColumn.identifier, ascending: true, comparator:{ s1,s2 in
+            let sortRules = NSSortDescriptor(key: tableColumn.identifier.rawValue, ascending: true, comparator:{ s1,s2 in
                     let str1 = s1 as! String
                     let str2 = s2 as! String
                     if str1 > str2 {return .orderedAscending}
@@ -239,7 +239,7 @@ class TableDataNavigationViewController: XibViewController {
             )
             
             //image列暂不排序
-            if tableColumn.identifier != "image" {
+            if tableColumn.identifier.rawValue != "image" {
                 tableColumn.sortDescriptorPrototype = sortDescriptor
             }
         }

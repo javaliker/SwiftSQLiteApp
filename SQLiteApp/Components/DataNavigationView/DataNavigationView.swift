@@ -3,7 +3,7 @@
 //  DataNavigationView
 //
 //  Created by iDevFans on 16/8/17.
-//  Copyright © 2016年 http://www.macdev.io All rights reserved.
+//  Copyright © 2016年 macdev. All rights reserved.
 //
 
 import Cocoa
@@ -64,15 +64,15 @@ class DataNavigationView: NSView {
     //默认的按钮配置
     func defaultItemsConfig() ->[AnyObject] {
         let item1 = DataNavigationButtonItem()
-        item1.imageName = NSImageNameAddTemplate
+        item1.imageName = NSImage.Name.addTemplate.rawValue
         item1.tag = .add
         
         let item2 = DataNavigationButtonItem()
-        item2.imageName = NSImageNameRemoveTemplate
+        item2.imageName = NSImage.Name.removeTemplate.rawValue
         item2.tag = .remove
 
         let item3 = DataNavigationButtonItem()
-        item3.imageName = NSImageNameRefreshTemplate
+        item3.imageName = NSImage.Name.refreshTemplate.rawValue
         item3.tag = .refresh
 
         
@@ -212,14 +212,16 @@ class DataNavigationView: NSView {
     func buttonWithItem(_ item:DataNavigationButtonItem) ->NSButton {
         let button = NSButton()
         //设置按钮图标
-        button.image = NSImage(named: item.imageName!)
+        button.image = NSImage(named: NSImage.Name(rawValue: item.imageName!))
         button.setButtonType(.momentaryPushIn)
         //无边框
         button.isBordered = false
         button.bezelStyle = .rounded
         button.isEnabled = true
-        button.state = NSOnState
-        button.identifier = item.identifier
+        button.state = .on
+        if let identifier = item.identifier {
+            button.identifier = NSUserInterfaceItemIdentifier(rawValue:identifier)
+        }
         button.toolTip = item.tooltips
         //设置按钮事件响应方法
         button.target = self.target
@@ -234,7 +236,9 @@ class DataNavigationView: NSView {
     func textLabelWithItem(_ item:DataNavigationTextItem) ->NSTextField {
         let textLabel = self.infoLabel()
         textLabel.stringValue = item.title!
-        textLabel.identifier = item.identifier
+        if let identifier = item.identifier {
+            textLabel.identifier = NSUserInterfaceItemIdentifier(rawValue:identifier)
+        }
         textLabel.textColor = item.textColor
        
         return textLabel
@@ -244,7 +248,7 @@ class DataNavigationView: NSView {
     func infoLabel() ->NSTextField {
         let label = NSTextField()
         label.alignment = .center
-        label.identifier = kInfoIdentifier
+        label.identifier = NSUserInterfaceItemIdentifier(rawValue: kInfoIdentifier)
         label.font = NSFont.labelFont(ofSize: 12)
         label.stringValue = ""
         label.isBezeled = false
@@ -258,7 +262,7 @@ class DataNavigationView: NSView {
     //根据identifier更新文本串的字符
     func updateLabelWithIdentifier(_ identifier:String, title labelTitle: String) {
         for view in self.subviews {
-            if view.identifier == identifier {
+            if view.identifier?.rawValue == identifier {
                 if let label = view as? NSTextField {
                     label.stringValue = labelTitle
                     break

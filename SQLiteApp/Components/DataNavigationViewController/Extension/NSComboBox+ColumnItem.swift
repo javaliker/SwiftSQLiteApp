@@ -17,7 +17,7 @@ extension NSComboBox {
         self.isBordered = false
         self.isBezeled = false
         self.bezelStyle = .roundedBezel
-        self.identifier = item.identifier
+        self.identifier = item.identifier.map { NSUserInterfaceItemIdentifier(rawValue: $0) }
     }
 }
 

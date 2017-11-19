@@ -17,7 +17,7 @@ class TableListViewDelegate: TreeViewDataDelegate {
     override func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView {
         let model = item as! TreeNodeModel
         let type = model.type
-        let result = outlineView.make(withIdentifier: type, owner: self)!
+        let result = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: type), owner: self)!
         let cell = result.subviews[1] as! NSTextField
         if model.name != "" {
             cell.stringValue = model.name

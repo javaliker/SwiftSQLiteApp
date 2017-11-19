@@ -24,7 +24,7 @@ extension NSColor {
     
     
     static func toolBarBackgroundColor() -> NSColor {
-        return NSColor(patternImage: NSImage(named: "arches")!)
+        return NSColor(patternImage: NSImage(named: NSImage.Name(rawValue: "arches"))!)
     }
 
 }

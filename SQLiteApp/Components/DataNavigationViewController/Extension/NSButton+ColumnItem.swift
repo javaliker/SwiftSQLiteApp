@@ -17,7 +17,7 @@ extension NSButton {
         self.bezelStyle = .regularSquare
         self.title = ""
         self.cell?.isBordered = false
-        self.identifier = item.identifier
+        self.identifier = item.identifier.map { NSUserInterfaceItemIdentifier(rawValue: $0) }
     }
 }
 

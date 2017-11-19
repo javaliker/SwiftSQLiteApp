@@ -14,6 +14,7 @@ class AppMainTabViewController: NSTabViewController {
         super.viewDidLoad()
         self.addChildViewControllers()
         // Do view setup here.
+        
     }
     
     func addChildViewControllers() {
@@ -24,7 +25,8 @@ class AppMainTabViewController: NSTabViewController {
         let schemaViewController = TableSchemaViewController()
         schemaViewController.title = "Schema"
         
-        let queryViewController = TableQueryViewController(nibName: "TableQueryViewController", bundle: nil)!
+        let nibName = NSNib.Name("TableQueryViewController")
+        let queryViewController = TableQueryViewController(nibName: nibName, bundle: nil)
         queryViewController.title = "Query"
         
         self.addChildViewController(dataViewController)

@@ -30,7 +30,7 @@ extension String {
             var match = [String]()
             for result in results {
                 for i in 0..<result.numberOfRanges {
-                  match.append(nsString.substring(with:result.rangeAt(i) ))
+                  match.append(nsString.substring(with:result.range(at: i) ))
                 }
             }
             return match

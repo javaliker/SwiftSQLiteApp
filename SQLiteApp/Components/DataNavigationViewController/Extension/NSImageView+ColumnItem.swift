@@ -12,7 +12,7 @@ extension NSImageView {
     
     convenience init(item: TableColumnItem) {
         self.init()
-        self.identifier = item.identifier
+        self.identifier = item.identifier.map { NSUserInterfaceItemIdentifier(rawValue: $0) }
     }
     
 }

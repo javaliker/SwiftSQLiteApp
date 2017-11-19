@@ -3,7 +3,7 @@
 //  TableViewControllerDemo
 //
 //  Created by iDevFans on 16/8/20.
-//  Copyright © 2016年 http://www.macdev.io All rights reserved.
+//  Copyright © 2016年 macdev. All rights reserved.
 //
 
 import Cocoa
@@ -19,6 +19,8 @@ typealias RowObjectValueChangedCallbackBlock =  (_ obj: AnyObject , _ oldObj: An
 
 
 let kTableViewDragDataTypeName  = "TableViewDragDataTypeName"
+
+let tableViewDragDataTypeName = NSPasteboard.PasteboardType(rawValue: kTableViewDragDataTypeName)
 
 class TableDataDelegate: NSObject {
     weak var owner: NSTableView?
@@ -51,7 +53,6 @@ class TableDataDelegate: NSObject {
             else {
                 self.items.append(aData)
             }
-            
         }
     }
     
@@ -161,7 +162,7 @@ extension TableDataDelegate: NSTableViewDataSource {
             callback(row,data)
         }
         
-       
+        
     }
     
     func tableView(_ tableView: NSTableView, sortDescriptorsDidChange oldDescriptors: [NSSortDescriptor]) {
@@ -179,23 +180,23 @@ extension TableDataDelegate: NSTableViewDataSource {
     func tableView(_ tableView: NSTableView, writeRowsWith rowIndexes: IndexSet, to pboard: NSPasteboard) -> Bool {
         
         let zNSIndexSetData = NSKeyedArchiver.archivedData(withRootObject: rowIndexes);
-        pboard.declareTypes([kTableViewDragDataTypeName], owner: self)
-        pboard.setData(zNSIndexSetData, forType: kTableViewDragDataTypeName)
+        pboard.declareTypes([tableViewDragDataTypeName], owner: self)
+        pboard.setData(zNSIndexSetData, forType: tableViewDragDataTypeName)
         return true
     }
     
     //允许拖放
-    func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableViewDropOperation) -> NSDragOperation {
+    func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
         return .every
     }
     
     
     //拖放结束后,从剪切板对象获取到拖放的dragRow.
     
-    func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableViewDropOperation) -> Bool {
+    func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
         
         let pboard = info.draggingPasteboard()
-        let rowData = pboard.data(forType: kTableViewDragDataTypeName)
+        let rowData = pboard.data(forType: tableViewDragDataTypeName)
         let rowIndexes = NSKeyedUnarchiver.unarchiveObject(with: rowData!) as! NSIndexSet
         let dragRow = rowIndexes.firstIndex
         
@@ -216,141 +217,144 @@ extension TableDataDelegate: NSTableViewDelegate {
         
         let data = self.items[row]
         //表格列的标识
-        let identifier = (tableColumn?.identifier)!
+        guard let identifierStr = tableColumn?.identifier.rawValue, let identifier = tableColumn?.identifier else {
+            return nil
+        }
+        
         //单元格数据
-        let value = data.value(forKey: identifier)
+        let value = data.value(forKey: identifierStr)
         
         //根据表格列的标识,创建单元视图
-        var view = tableView.make(withIdentifier: identifier, owner: self)
+        var view = tableView.makeView(withIdentifier: identifier, owner: self)
         
-        let tableColumnItem = tableView.xx_columnItemWithIdentifier(identifier)!
+        let tableColumnItem = tableView.xx_columnItemWithIdentifier(identifierStr)!
         
-            switch (tableColumnItem.cellType) {
-                
-            case .checkBox:
-                
-                var  checkBoxField: NSButton?
-                //如果不存在,创建新的checkBoxField
-                if view == nil {
-                    checkBoxField = NSButton.init(item: tableColumnItem)
-                    view = checkBoxField
-                    view?.identifier = identifier
-                }
-                else{
-                    checkBoxField = view as? NSButton
-                }
-                
-                checkBoxField?.target = self
-                checkBoxField?.action = #selector(TableDataDelegate.checkBoxChick(_:))
-                
-                if let state  = value {
-                    if state is NSNumber {
-                        checkBoxField?.state = state as! NSInteger
-                    }
-                    
-                }
-                
-                break
-
-            case .comboBox:
-                
-                var comboBoxField: NSComboBox?
+        switch (tableColumnItem.cellType) {
             
-                if view == nil {
-
-                    view = NSTableCellView()
-                    view?.identifier = identifier
-                    comboBoxField =  NSComboBox.init(item: tableColumnItem)
-                    comboBoxField?.delegate = self
-                    comboBoxField?.translatesAutoresizingMaskIntoConstraints = false
-                    view?.addSubview(comboBoxField!)
-                    
-                    
-                    let left = comboBoxField?.leftAnchor.constraint(equalTo: (view?.leftAnchor)!, constant: 0)
-                    let right = comboBoxField?.rightAnchor.constraint(equalTo: (view?.rightAnchor)!, constant: 0)
-                    
-                    let centerY = comboBoxField?.centerYAnchor.constraint(equalTo: (view?.centerYAnchor)!, constant: 0)
-                    NSLayoutConstraint.activate([left!, right!, centerY!])
-
+        case .checkBox:
+            
+            var  checkBoxField: NSButton?
+            //如果不存在,创建新的checkBoxField
+            if view == nil {
+                checkBoxField = NSButton.init(item: tableColumnItem)
+                view = checkBoxField
+                view?.identifier = identifier
+            }
+            else{
+                checkBoxField = view as? NSButton
+            }
+            
+            checkBoxField?.target = self
+            checkBoxField?.action = #selector(TableDataDelegate.checkBoxChick(_:))
+            
+            if let state  = value {
+                if state is NSNumber {
+                    checkBoxField?.state = NSControl.StateValue(rawValue: state as! NSInteger)
                 }
-                else{
-                    comboBoxField = view?.subviews[0] as? NSComboBox
-                }
-                
-                let items = tableColumnItem.items
-                if let values = items {
-                    comboBoxField?.addItems(withObjectValues: values)
-                }
-                
-                if let text  = value {
-                    
-                    if text is String {
-                       comboBoxField?.stringValue = text as! String
-                    }
-                    
-                    
-                }
-                
-                break
-                
-                
-            case .imageView:
-                
-                
-                
-                var imageField: NSImageView?
-                //如果不存在,创建新的textField
-                 if view == nil {
-                    imageField =  NSImageView.init(item: tableColumnItem)
-                    view = imageField
-                    view?.identifier = identifier
-                }
-                else{
-                    imageField = view as? NSImageView
-                }
-                
-                if let image  = value {
-                    //更新单元格的image
-                    imageField?.image = image as? NSImage
-                }
-
-                
-                break
-                
-            default:
-    
-                    var  textField: NSTextField?
-                    //如果不存在,创建新的textField
-                    if view == nil {
-                        textField = NSTextField.init(item: tableColumnItem)
-                        textField?.delegate  = self
-                        view = textField
-                        view?.identifier = identifier
-                    }
-                    else{
-                        textField = view as? NSTextField
-                    }
-                    
-                    textField?.stringValue  = ""
-                    if let text  = value {
-                        //更新单元格的文本
-                       
-                        if text is String {
-                            textField?.stringValue = text as! String
-                        }
-                        if text is NSNumber {
-                            let num = text as! NSNumber
-                            textField?.stringValue = num.stringValue
-                        }
-                        
-                    }
-                
-                break
                 
             }
+            
+            break
+            
+        case .comboBox:
+            
+            var comboBoxField: NSComboBox?
+            
+            if view == nil {
+                
+                view = NSTableCellView()
+                view?.identifier = identifier
+                comboBoxField =  NSComboBox.init(item: tableColumnItem)
+                comboBoxField?.delegate = self
+                comboBoxField?.translatesAutoresizingMaskIntoConstraints = false
+                view?.addSubview(comboBoxField!)
+                
+                
+                let left = comboBoxField?.leftAnchor.constraint(equalTo: (view?.leftAnchor)!, constant: 0)
+                let right = comboBoxField?.rightAnchor.constraint(equalTo: (view?.rightAnchor)!, constant: 0)
+                
+                let centerY = comboBoxField?.centerYAnchor.constraint(equalTo: (view?.centerYAnchor)!, constant: 0)
+                NSLayoutConstraint.activate([left!, right!, centerY!])
+                
+            }
+            else{
+                comboBoxField = view?.subviews[0] as? NSComboBox
+            }
+            
+            let items = tableColumnItem.items
+            if let values = items {
+                comboBoxField?.addItems(withObjectValues: values)
+            }
+            
+            if let text  = value {
+                
+                if text is String {
+                    comboBoxField?.stringValue = text as! String
+                }
+                
+                
+            }
+            
+            break
+            
+            
+        case .imageView:
+            
+            
+            
+            var imageField: NSImageView?
+            //如果不存在,创建新的textField
+            if view == nil {
+                imageField =  NSImageView.init(item: tableColumnItem)
+                view = imageField
+                view?.identifier = identifier
+            }
+            else{
+                imageField = view as? NSImageView
+            }
+            
+            if let image  = value {
+                //更新单元格的image
+                imageField?.image = image as? NSImage
+            }
+            
+            
+            break
+            
+        default:
+            
+            var  textField: NSTextField?
+            //如果不存在,创建新的textField
+            if view == nil {
+                textField = NSTextField.init(item: tableColumnItem)
+                textField?.delegate  = self
+                view = textField
+                view?.identifier = identifier
+            }
+            else{
+                textField = view as? NSTextField
+            }
+            
+            textField?.stringValue  = ""
+            if let text  = value {
+                //更新单元格的文本
+                
+                if text is String {
+                    textField?.stringValue = text as! String
+                }
+                if text is NSNumber {
+                    let num = text as! NSNumber
+                    textField?.stringValue = num.stringValue
+                }
+                
+            }
+            
+            break
+            
+        }
         
         return view
-
+        
     }
     
     
@@ -360,7 +364,11 @@ extension TableDataDelegate: NSTableViewDelegate {
     
     
     @IBAction func checkBoxChick(_ sender:NSButton) {
-        let identifier = sender.identifier
+        
+        guard let identifier = sender.identifier?.rawValue else {
+            return
+        }
+        
         let rowIndex = self.owner?.selectedRow
         
         
@@ -370,17 +378,16 @@ extension TableDataDelegate: NSTableViewDelegate {
             let oldData = data
             //更新数据源
             
-            data.setValue(NSNumber.init(value:  sender.state), forKey: identifier!)
-            
+            data.setValue(sender.state.rawValue, forKey: identifier)
             
             self.updateData(data: data, row: rowIndex!)
             //数据变化回调通知
             if let callback = rowObjectValueChangedCallback {
-                callback(data, oldData, rowIndex!, identifier!)
+                callback(data, oldData, rowIndex!, identifier)
             }
         }
-
-    
+        
+        
     }
 }
 
@@ -390,18 +397,20 @@ extension TableDataDelegate: NSTextFieldDelegate {
         
         let field = obj.object as! NSTextField
         
-        let identifier = field.identifier
+        guard let identifier = field.identifier?.rawValue else {
+            return
+        }
         let rowIndex = self.owner?.selectedRow
         var data = self.itemOf(row: rowIndex!) as! Dictionary<String,Any>
         //老数据的copy
         let oldData = data
         //更新数据源
-        data[identifier!] = field.stringValue
+        data[identifier] = field.stringValue
         self.updateData(data: data as AnyObject?, row: rowIndex!)
         
         //数据变化回调通知
         if let callback = rowObjectValueChangedCallback {
-            callback(data as AnyObject, oldData as AnyObject, rowIndex!, identifier!)
+            callback(data as AnyObject, oldData as AnyObject, rowIndex!, identifier)
         }
     }
 }
@@ -410,7 +419,9 @@ extension TableDataDelegate: NSTextFieldDelegate {
 extension TableDataDelegate: NSComboBoxDelegate {
     func comboBoxSelectionDidChange(_ notification: Notification) {
         let field = notification.object as! NSComboBox
-        let identifier = field.identifier
+        guard let identifier = field.identifier?.rawValue else {
+            return
+        }
         let rowIndex = self.owner?.selectedRow
         var data = self.itemOf(row: rowIndex!) as!  Dictionary<String,Any>
         //老数据的copy
@@ -418,16 +429,19 @@ extension TableDataDelegate: NSComboBoxDelegate {
         //更新数据源
         let indexOfSelectedItem = field.indexOfSelectedItem
         let type = field.itemObjectValue(at: indexOfSelectedItem)
-        data[identifier!] = type 
+        data[identifier] = type
         
         self.updateData(data: data as AnyObject?, row: rowIndex!)
         
         //数据变化回调通知
         if let callback = rowObjectValueChangedCallback {
-            callback(data as AnyObject, oldData as AnyObject, rowIndex!, identifier!)
+            callback(data as AnyObject, oldData as AnyObject, rowIndex!, identifier)
         }
     }
 }
+
+
+
 
 
 

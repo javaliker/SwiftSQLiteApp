@@ -12,8 +12,8 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     lazy var preferencesWindowController: PreferencesWindowController  = {
-        let sb = NSStoryboard(name: "Main", bundle: Bundle.main)
-        let pWVC = sb.instantiateController(withIdentifier: "Preferences") as! PreferencesWindowController
+        let sb = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: Bundle.main)
+        let pWVC = sb.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "Preferences")) as! PreferencesWindowController
         return pWVC
     }()
     

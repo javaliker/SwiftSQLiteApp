@@ -42,6 +42,14 @@ class TableBrowseViewController: TableDataNavigationViewController {
         
     }
 
+    
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        self.view.window?.center()
+        print("viewDidLayout")
+    }
+    
+    
     override func tableDelegateConfig() {
         self.tableView?.delegate   = self.dataDelegate
         self.tableView?.dataSource = self.dataDelegate

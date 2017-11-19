@@ -85,7 +85,7 @@ extension TreeViewDataDelegate: NSOutlineViewDelegate {
     
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
         
-        let view = outlineView.make(withIdentifier: (tableColumn?.identifier)!, owner: self)
+        let view = outlineView.makeView(withIdentifier: (tableColumn?.identifier)!, owner: self)
         let subviews  = view?.subviews
         //let imageView = subviews?[0] as! NSImageView
         
@@ -147,41 +147,42 @@ extension TreeViewDataDelegate: NSOutlineViewDataSource {
     }
     
     func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
-        
         let rootNode:TreeNodeModel = item as! TreeNodeModel
         return rootNode.childNodes.count > 0
     }
     
     
     func  outlineView(_ outlineView: NSOutlineView, validateDrop info: NSDraggingInfo, proposedItem item: Any?, proposedChildIndex index: Int) -> NSDragOperation {
-        
         return .every
     }
     
     
     func outlineView(_ outlineView: NSOutlineView, acceptDrop info: NSDraggingInfo, item: Any?, childIndex index: Int) -> Bool {
-   
         let pboard = info.draggingPasteboard()
-        
         self.handleFileBasedDrops(pboard)
-      
         return true
     }
     
-    
     func handleFileBasedDrops(_ pboard: NSPasteboard ) {
-        
-        let files = (pboard.propertyList(forType: NSFilenamesPboardType))! as!  Array<String>
-        let numberOfFiles = files.count
-        
-        if numberOfFiles > 0 {
-            let filePath = files[0] as String
+        let fileURLType = NSPasteboard.PasteboardType.backwardsCompatibleFileURL
+        if (pboard.types?.contains(fileURLType))! {
+            var filePath: String?
+            if #available(OSX 10.13, *) {
+                if let utTypeFilePath = pboard.propertyList(forType:fileURLType) as? URL {
+                    filePath = utTypeFilePath.path
+                }
+            }
+            else {
+                // UTType 类型的文件路径，需要转换成标准路径
+                if let utTypeFilePath = pboard.string(forType:fileURLType) {
+                    filePath =  URL(fileURLWithPath: utTypeFilePath).standardized.path
+                }
+            }
             //代理通知
-            if let dragFileCallBack = self.dragFileCallBack {
+            if let dragFileCallBack = self.dragFileCallBack, let filePath = filePath {
                 dragFileCallBack(filePath)
             }
         }
-        
     }
     
 }

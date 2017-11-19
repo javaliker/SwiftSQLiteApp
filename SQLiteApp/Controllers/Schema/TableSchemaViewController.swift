@@ -114,17 +114,17 @@ class TableSchemaViewController: TableDataNavigationViewController {
 
     override func dataNavigationItemsConfig() -> [DataNavigationItem] {
         let insertItem = DataNavigationButtonItem()
-        insertItem.imageName = NSImageNameAddTemplate
+        insertItem.imageName = NSImage.Name.addTemplate.rawValue
         insertItem.tooltips = "insert a row into current table"
         insertItem.tag = .add
         
         let deleteItem = DataNavigationButtonItem()
-        deleteItem.imageName = NSImageNameRemoveTemplate
+        deleteItem.imageName = NSImage.Name.removeTemplate.rawValue
         deleteItem.tooltips = "delete seleted rows form current table"
         deleteItem.tag = .remove
         
         let refreshItem = DataNavigationButtonItem()
-        refreshItem.imageName = NSImageNameRefreshTemplate
+        refreshItem.imageName = NSImage.Name.refreshTemplate.rawValue
         refreshItem.tooltips = "reload table data"
         refreshItem.tag = .refresh
 

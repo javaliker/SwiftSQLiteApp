@@ -10,9 +10,9 @@ import Cocoa
 
 class XibViewController: NSViewController {
 
-    override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+    override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
         if nibNameOrNil == nil {
-            super.init(nibName: "XibViewController", bundle: nibBundleOrNil)
+            super.init(nibName: NSNib.Name(rawValue: "XibViewController"), bundle: nibBundleOrNil)
         }
         else {
             super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)

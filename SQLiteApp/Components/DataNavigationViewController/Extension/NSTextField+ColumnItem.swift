@@ -17,7 +17,7 @@ extension NSTextField {
         self.drawsBackground = false
         self.isEditable = item.editable
         self.isSelectable = item.editable
-        self.identifier = item.identifier
+        self.identifier = item.identifier.map { NSUserInterfaceItemIdentifier(rawValue: $0) }
     }
 }
 

@@ -30,19 +30,19 @@ class AppMainWindowController: NSWindowController {
         //Toolbar 跟titleBar 融合在一起显示
         self.window?.titleVisibility = .hidden;
         //透明化
-        self.window?.titlebarAppearsTransparent = true
+        //self.window?.titlebarAppearsTransparent = true
         //设置背景颜色
-        self.window?.backgroundColor = NSColor.white
+        //self.window?.backgroundColor = NSColor.red
     }
     
-    override var windowNibName: String? {
-        return "AppMainWindowController"
+    override var windowNibName: NSNib.Name? {
+        return NSNib.Name("AppMainWindowController")
     }
-
+    
     func setWindowTitleImage(){
         self.window?.representedURL = URL(string:"WindowTitle")
         self.window?.title = "SQLiteApp"
-        let image = NSImage(named: "windowIcon")
+        let image = NSImage(named: NSImage.Name(rawValue: "windowIcon"))
         self.window?.standardWindowButton(.documentIconButton)?.image = image
     }
     
@@ -57,7 +57,7 @@ class AppMainWindowController: NSWindowController {
         
         openFileDlg.begin(completionHandler: { [weak self] result in
             
-            if(result == NSFileHandlingPanelOKButton){
+            if(result.rawValue == NSFileHandlingPanelOKButton){
                 
                 let fileURLs = self?.openFileDlg.urls
                 
@@ -89,7 +89,7 @@ class AppMainWindowController: NSWindowController {
         alert.alertStyle = .informational
         alert.beginSheetModal(for: self.window!, completionHandler: { returnCode in
                //当有多个按钮是 可以通过returnCode区分判断
-               if returnCode == NSAlertFirstButtonReturn {
+               if returnCode == NSApplication.ModalResponse.alertFirstButtonReturn {
                 
                     NotificationCenter.default.post(name:Notification.Name.onCloseDBFile, object: nil)
                 
@@ -102,7 +102,7 @@ class AppMainWindowController: NSWindowController {
         
         let url = URL(string: kHomeURL)
         
-        if !NSWorkspace.shared().open(url!) {
+        if !NSWorkspace.shared.open(url!) {
             print("open failed!")
         }
     }

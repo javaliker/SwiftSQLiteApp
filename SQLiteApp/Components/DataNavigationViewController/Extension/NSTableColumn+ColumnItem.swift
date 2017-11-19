@@ -13,7 +13,7 @@ extension NSTableColumn {
     
     static func column(_ item: TableColumnItem) -> NSTableColumn{
         let column = NSTableColumn()
-        column.identifier = item.identifier!
+        column.identifier = NSUserInterfaceItemIdentifier(rawValue: item.identifier!)
         column.width      = item.width
         column.minWidth   = item.minWidth
         column.maxWidth   = item.maxWidth

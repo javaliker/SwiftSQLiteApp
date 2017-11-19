@@ -63,6 +63,7 @@ class TableListViewController: NSViewController {
         self.fetchData()
     }
     
+    
     func treeViewStyleConfig() {
         self.treeView.allowsMultipleSelection = true
         let color = NSColor(hex:0xd7dde5)
@@ -70,7 +71,7 @@ class TableListViewController: NSViewController {
     }
     
     func registerFilesDrag() {
-        self.treeView.register(forDraggedTypes: [NSFilenamesPboardType])
+        self.treeView.registerForDraggedTypes([NSPasteboard.PasteboardType.backwardsCompatibleFileURL])
     }
     
     func treeViewDelegateConfig() {
@@ -99,12 +100,12 @@ class TableListViewController: NSViewController {
         NotificationCenter.default.addObserver(self, selector:#selector(self.onCloseSQLiteFile(_:)),  name:NSNotification.Name.onCloseDBFile, object: nil)
     }
     
-    func onOpenSQLiteFile(_ notification: Notification){
+    @objc func onOpenSQLiteFile(_ notification: Notification){
         let path = notification.object as! String
         self.openDatabaseWithPath(path: path)
     }
     
-    func onCloseSQLiteFile(_ notification: Notification){
+    @objc func onCloseSQLiteFile(_ notification: Notification){
         self.closeDatabase()
     }
     
@@ -203,11 +204,11 @@ class TableListViewController: NSViewController {
         //提示的详细内容
         alert.informativeText = "Drop Table \(tableName)?"
         //设置告警风格
-        alert.alertStyle = NSCriticalAlertStyle
+        alert.alertStyle = .critical
         //开始显示告警
-        alert.beginSheetModal(for: self.view.window!, completionHandler: {(returnCode: NSModalResponse) -> Void in
+        alert.beginSheetModal(for: self.view.window!, completionHandler: {(returnCode: NSApplication.ModalResponse) -> Void in
             print("returnCode \(returnCode)")
-            if returnCode == NSAlertFirstButtonReturn {
+            if returnCode == NSApplication.ModalResponse.alertFirstButtonReturn {
                 self.dropTable(tableName)
             }
             //用户点击告警上面的按钮后的回调
